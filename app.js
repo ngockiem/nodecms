@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const hbs = require('express-handlebars');
 
+const {mongoDBUrl} = require('./config/configuration');
+
 const app = express();
 const port = 3000;
 
@@ -13,7 +15,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'publics')));
 
 /* Config Mongoose connect MongoDB */
-mongoose.connect('mongodb://localhost:27017/cms', {useNewUrlParser: true});
+mongoose.connect(mongoDBUrl, {useNewUrlParser: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
