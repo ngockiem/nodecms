@@ -1,0 +1,28 @@
+{
+  "name": "nodecms",
+  "version": "1.0.0",
+  "description": "cms made by nodejs express mongoDB",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngockiem/nodecms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ngockiem/nodecms/issues"
+  },
+  "homepage": "https://github.com/ngockiem/nodecms#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "mongoose": "^5.8.4",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
