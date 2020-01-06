@@ -3,10 +3,9 @@ const mongoose = require('mongoose');
 const path = require('path');
 const hbs = require('express-handlebars');
 
-const {mongoDBUrl} = require('./config/configuration');
+const {mongoDBUrl, PORT} = require('./config/configuration');
 
 const app = express();
-const port = 3000;
 
 
 /* Config Express */
@@ -26,9 +25,9 @@ db.once('open', function() {
 app.engine('handlebars', hbs({defaultLayout: 'default'}));
 app.set('view engine', 'handlebars');
 
-app.use('/', (req, res) => {
-  res.render('default/index');
-});
+/* Routes */
+const defaultRoutes = require('./routes/defaultRoutes');
+app.use('/', defaultRoutes);
 
 
-app.listen(port, () => console.log(`Server listening on port ${port}!`));
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}!`));
