@@ -2,8 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const hbs = require('express-handlebars');
+const flash = require('connect-flash');
+const session = require('express-session');
 
-const {mongoDBUrl, PORT} = require('./config/configuration');
+const {mongoDBUrl, PORT, globalVariables} = require('./config/configuration');
 
 const app = express();
 
@@ -21,13 +23,26 @@ db.once('open', function() {
   console.log('DB connected !!');
 });
 
+/* Config Flash and Session */
+app.use(session({
+  secret : 'sercretkeyhere',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(flash());
+
+/* Use Global Variables */
+app.use(globalVariables);
+
 /* Configure view engine with handlebars */
 app.engine('handlebars', hbs({defaultLayout: 'default'}));
 app.set('view engine', 'handlebars');
 
 /* Routes */
 const defaultRoutes = require('./routes/defaultRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 app.use('/', defaultRoutes);
+app.use('/admin', adminRoutes);
 
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}!`));

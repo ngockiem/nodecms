@@ -4,22 +4,25 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
 
   title: {
-    type: string,
+    type: String,
     required: true
-  }
+  },
 
   status: {
-    type: string,
+    type: String,
     default: 'public'
-  }
+  },
 
   description: {
-    type: string,
+    type: String,
     required: true
-  }
+  },
 
   creationDate: {
-    default: Date.now()
+    type: Date,
+    default: Date.now
   }
 
 });
+
+module.exports = {Post: mongoose.model('post', PostSchema)};
