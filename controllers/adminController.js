@@ -10,20 +10,33 @@ module.exports = {
         posts: posts
       });
     });
-
   },
+
   postCreate: (req, res) => {
     res.render('admin/post/create');
   },
+
   postSubmit: (req, res) => {
+    let allowComments = req.body.allowComments ? true : false;
     let newPost = new Post({
       title: req.body.title,
       description: req.body.description,
-      status: req.body.status
+      status: req.body.status,
+      allowComments: allowComments
     });
     newPost.save().then(post =>{
       req.flash('messSuccess','Add new post successfully !');
       res.redirect('/admin/post');
+    });
+  },
+
+  postEdit: (req, res) => {
+    var postId = req.params.id;
+    console.log(postId);
+    Post.findById(postId).then(result => {
+      res.render('admin/post/edit',{
+        post: result
+      });
     });
   }
 

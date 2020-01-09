@@ -9,6 +9,7 @@
             <th>Title</th>
             <th>Description</th>
             <th>Status</th>
+            <th>Comments Allowed</th>
         </tr>
         </thead>
         <tbody class="text-center">
@@ -17,6 +18,13 @@
                 <td>{{title}}</td>
                 <td>{{description}}</td>
                 <td>{{status}}</td>
+                <td>{{allowComments}}</td>
+                <td class="d-flex">
+                    <a href="/admin/post/edit/{{_id}}" class="btn btn-sm btn-warning mr-2">Edit Post</a>
+                    <form action="/admin/post/delete/{{id}}?newMethod=DELETE" method="post">
+                        <button class="btn btn-sm btn-danger" type="submit">Delete Post</button>
+                    </form>
+                </td>
             </tr>
         {{/each}}
 
