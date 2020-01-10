@@ -4,6 +4,7 @@ const path = require('path');
 const hbs = require('express-handlebars');
 const flash = require('connect-flash');
 const session = require('express-session');
+const methodOverride = require('method-override');
 
 const {mongoDBUrl, PORT, globalVariables} = require('./config/configuration');
 
@@ -33,6 +34,9 @@ app.use(flash());
 
 /* Use Global Variables */
 app.use(globalVariables);
+
+/* Method override middleware */
+app.use(methodOverride('newMethod'));
 
 /* Configure view engine with handlebars */
 app.engine('handlebars', hbs({defaultLayout: 'default'}));

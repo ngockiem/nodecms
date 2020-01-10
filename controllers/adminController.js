@@ -32,11 +32,17 @@ module.exports = {
 
   postEdit: (req, res) => {
     var postId = req.params.id;
-    console.log(postId);
     Post.findById(postId).then(result => {
       res.render('admin/post/edit',{
         post: result
       });
+    });
+  },
+
+  postDelete: (req, res) => {
+    Post.findByIdAndDelete(req.params.id).then(postDelete => {
+      req.flash('messSuccess', `The post ${postDelete.id} has been deleted.`);
+      res.redirect('/admin/post');
     });
   }
 
